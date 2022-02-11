@@ -5,3 +5,4 @@ class Player(models.Model):
     won = models.PositiveIntegerField(default=0)
     loss = models.PositiveIntegerField(default=0)
     played = models.PositiveIntegerField(default=0)
+    
