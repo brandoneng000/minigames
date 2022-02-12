@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import PlayerViewSet
+from .views import PlayerViewSet, RPSView
 
 urlpatterns = [
     path('players', PlayerViewSet.as_view({
