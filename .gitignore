@@ -134,3 +134,4 @@ docker-compose.yml
 .ebextensions
 settings-local.py
 settings-prod.py
+staticfiles

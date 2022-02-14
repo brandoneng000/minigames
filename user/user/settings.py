@@ -142,4 +142,5 @@ REST_FRAMEWORK = {
     )
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # CSRF_COOKIE_DOMAIN = 'http://127.0.0.1:8000/'
