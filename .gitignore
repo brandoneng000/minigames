@@ -135,4 +135,3 @@ docker-compose.yml
 settings-local.py
 settings-prod.py
 staticfiles
-deploy.sh
