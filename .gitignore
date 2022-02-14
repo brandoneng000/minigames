@@ -131,3 +131,6 @@ dmypy.json
 Dockerfile
 docker-compose.yml
 .dbdata
+.ebextensions
+settings-local.py
+settings-prod.py

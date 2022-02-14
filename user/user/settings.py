@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'django-env.eba-sz33ctdm.us-west-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -143,4 +143,4 @@ REST_FRAMEWORK = {
     )
 }
 
-CSRF_COOKIE_DOMAIN = 'http://127.0.0.1:8000/'
+# CSRF_COOKIE_DOMAIN = 'http://127.0.0.1:8000/'
