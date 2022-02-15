@@ -12,7 +12,6 @@ from .serializers import PlayerSerializer
 from .forms import NewUserForm
 
 # Create your views here.
-@csrf_exempt
 class PlayerViewSet(viewsets.ViewSet):
     
     def list(self, request):
