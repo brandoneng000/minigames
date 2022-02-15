@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-        <form method="PUT"> {% csrf_token %}
         <body>
             <h1>Join everyone playing Rock Paper Scissors</h1>
 
@@ -27,24 +26,6 @@
                     var lossElement = document.getElementById("loss");
                     var tiesElement = document.getElementById("ties");
                     var playedElement = document.getElementById("played");
-                    /*
-                    function getCookie(name) {
-                        var cookieValue = null;
-                        if (document.cookie && document.cookie !== '') {
-                            var cookies = document.cookie.split(';');
-                            for (var i = 0; i < cookies.length; i++) {
-                                var cookie = cookies[i].trim();
-                                // Does this cookie string begin with the name we want?
-                                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                    break;
-                                }
-                            }
-                        }
-                        return cookieValue;
-                    }
-                    var csrftoken = getCookie('csrftoken'); 
-                    */
                     updatePlayerStats();
 
                     function updatePlayerStats() {
@@ -127,7 +108,8 @@
                                     method: 'PUT', // or 'PUT'
                                     headers: {
                                         'Content-Type': 'application/json',
-                                        // 'X-CSRF-TOKEN': csrftoken,
+                                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                        'credentials': 'include' 
                                     },
                                     body: JSON.stringify(data),
                                 })
@@ -142,7 +124,6 @@
                             });
                     }
                 </script>
-            </form>
             </body>
             
 </html>
