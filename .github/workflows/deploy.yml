@@ -22,8 +22,8 @@ jobs:
 
       - name: Run tests
         working-directory: /home/ubuntu/minigames
-          ls -al
         run: |
+          ls -al
           pip install -r requirements.txt
           python3 manage.py tests
 
