@@ -1,10 +1,10 @@
-from turtle import delay
 from typing import OrderedDict
 from django.test import TestCase
 from player.models import Player
 from django.http import HttpRequest
 from random import randint
 from time import sleep
+from collections import OrderedDict
 
 from player.serializers import PlayerSerializer
 from player.views import PlayerViewSet
