@@ -1,4 +1,3 @@
-
 name: AWS SSM Send-Command Example
 
 on:
@@ -6,11 +5,30 @@ on:
     branches: [main]
 
 jobs:
-  start:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.6.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6.9
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo SECRET_KEY=eghszrdehrmhopdrtjdrherhesrth >> .env
+          echo TESTING=TEST >> .env
+
+      - name: Run Tests
+        run: |
+          python manage.py test
 
       - name: AWS SSM Send-Command
         uses: peterkimzz/aws-ssm-send-command@master
