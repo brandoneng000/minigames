@@ -14,13 +14,16 @@ jobs:
         with:
           python-version: 3.6.9
       - name: Run Python commands
-        working-directory: /home/ubuntu/minigames
         run: |
           pip install --upgrade pip
           python3 -m venv env
           source env/bin/activate
           pip install --upgrade pip
+
+      - name: Run tests
+        working-directory: /home/ubuntu/minigames
           ls -al
+        run: |
           pip install -r requirements.txt
           python3 manage.py tests
 
