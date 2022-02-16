@@ -9,6 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Python 3.6.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6.9
+      - name: Run Python commands
+        run: |
+          pip install --upgrade pip
+          python3 -m venv env
+          source env/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          python3 manage.py tests
+
       - uses: actions/checkout@v2
 
       - name: AWS SSM Send-Command
@@ -22,16 +35,3 @@ jobs:
           comment: Deploy the master branch
           working-directory: /home/ubuntu/minigames
           command: /bin/sh ./deploy.sh
-
-      - name: Set up Python 3.6.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.6.9
-      - name: Run Python commands
-        run: |
-          pip install --upgrade pip
-          python3 -m venv env
-          source env/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          python3 manage.py tests
