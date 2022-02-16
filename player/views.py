@@ -24,6 +24,10 @@ class PlayerViewSet(viewsets.ViewSet):
         # /api/player
         serializer = PlayerSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        check = serializer.validated_data
+        if(check['won'] + check['loss'] + check['ties'] != check['played']):
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
@@ -38,6 +42,11 @@ class PlayerViewSet(viewsets.ViewSet):
         player = Player.objects.get(id=pk)
         serializer = PlayerSerializer(instance=player, data=request.data)
         serializer.is_valid(raise_exception=True)
+        
+        check = serializer.validated_data
+        if(check['won'] + check['loss'] + check['ties'] != check['played']):
+            return Response(status=status.HTTP_304_NOT_MODIFIED)
+            
         serializer.save()
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
