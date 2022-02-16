@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +22,7 @@ jobs:
           pip install -r /home/runner/work/minigames/minigames/requirements.txt
           python3 manage.py tests
 
-  deploy:
       - uses: actions/checkout@v2
-
       - name: AWS SSM Send-Command
         uses: peterkimzz/aws-ssm-send-command@master
         id: ssm
