@@ -43,4 +43,4 @@ jobs:
           command: 
             /bin/sh 
             ./deploy.sh
-            ls -al
+            cat ./deploy.sh
