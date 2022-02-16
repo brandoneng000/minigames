@@ -42,7 +42,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'player',
     'crispy_forms',
+    'rest_framework.authtoken'
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -135,11 +142,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
