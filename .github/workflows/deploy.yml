@@ -21,6 +21,11 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo SECRET_KEY=eghszrdehrmhopdrtjdrherhesrth >> .env
+
       - name: Run Tests
         run: |
           python manage.py test
