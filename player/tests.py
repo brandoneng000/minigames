@@ -1,4 +1,3 @@
-from typing import OrderedDict
 from django.test import TestCase
 from player.models import Player
 from django.http import HttpRequest
