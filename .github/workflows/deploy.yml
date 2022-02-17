@@ -12,20 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: AWS SSM Send-Command
-        uses: peterkimzz/aws-ssm-send-command@master
-        id: ssm
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          instance-ids: ${{ secrets.INSTANCE_ID }}
-          comment: Deploy the master branch
-          working-directory: /home/ubuntu/minigames
-          command: 
-            /bin/sh 
-            ./deploy.sh
-
       - name: Set up Python 3.6.9
         uses: actions/setup-python@v2
         with:
@@ -43,7 +29,7 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test
-
+          
       - name: AWS SSM Send-Command
         uses: peterkimzz/aws-ssm-send-command@master
         id: ssm
@@ -54,4 +40,6 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           comment: Deploy the master branch
           working-directory: /home/ubuntu/minigames
-          command: /bin/sh ./deploy.sh
+          command: 
+            /bin/sh 
+            ./deploy.sh
