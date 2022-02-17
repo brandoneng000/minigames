@@ -32,7 +32,7 @@ jobs:
           python manage.py test
           
       - name: AWS SSM Send-Command
-        uses: peterkimzz/aws-ssm-send-command@1.01
+        uses: peterkimzz/aws-ssm-send-command@1.0.1
         id: ssm
         with:
           aws-region: us-west-1
