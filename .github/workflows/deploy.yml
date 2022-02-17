@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
 
@@ -25,3 +25,40 @@ jobs:
           command: 
             /bin/sh 
             ./deploy.sh
+
+      - name: Set up Python 3.6.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6.9
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo SECRET_KEY=eghszrdehrmhopdrtjdrherhesrth >> .env
+          echo TESTING=TEST >> .env
+
+      - name: Run Tests
+        run: |
+          python manage.py test
+          
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: AWS SSM Send-Command
+        uses: peterkimzz/aws-ssm-send-command@master
+        id: ssm
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          instance-ids: ${{ secrets.INSTANCE_ID }}
+          comment: Deploy the master branch
+          working-directory: /home/ubuntu/minigames
+          command: /bin/sh /deploy.sh
