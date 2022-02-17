@@ -61,4 +61,4 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           comment: Deploy the master branch
           working-directory: /home/ubuntu/minigames
-          command: /bin/sh /deploy.sh
+          command: /bin/sh ./deploy.sh
