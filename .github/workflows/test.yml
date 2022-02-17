@@ -5,6 +5,31 @@ on:
     branches: [main]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.6.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6.9
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo SECRET_KEY=eghszrdehrmhopdrtjdrherhesrth >> .env
+          echo TESTING=TEST >> .env
+
+      - name: Run Tests
+        run: |
+          python manage.py test
+
   deploy:
     runs-on: ubuntu-latest
     steps:
