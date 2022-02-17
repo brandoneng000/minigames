@@ -40,9 +40,7 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
           comment: Deploy the master branch
           working-directory: /home/ubuntu/minigames
-          command: 
-            /bin/sh 
-            ./deploy.sh
+          command: /bin/sh ./deploy.sh
             
       - name: Get the outputs
         run: echo "The Command id is ${{ steps.ssm.outputs.command-id }}"
