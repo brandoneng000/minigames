@@ -20,7 +20,7 @@
         <button onclick="getPlayerChoice('Scissors')">Scissors</button>
         <br/>
         <h1 id="gameResults"></h1>
-        
+
         <script>  
             var url = 'https://worldminigame.com/api/players/1';
             var wonElement = document.getElementById("won");
@@ -33,7 +33,7 @@
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         wonElement.innerHTML = data.won
                         lossElement.innerHTML = data.loss
                         tiesElement.innerHTML = data.ties
@@ -116,11 +116,11 @@
                         })
                             .then(response => response.json())
                             .then(data => {
-                                console.log('Success:', data);
+                                // console.log('Success:', data);
                                 cb();
                             })
                             .catch((error) => {
-                                console.error('Error:', error);
+                                // console.error('Error:', error);
                             });
                     });
             }
