@@ -84,7 +84,7 @@ class PlayerViewTests(TestCase):
         request = HttpRequest()
         request.data = {'won': 5, 'loss': 0, 'ties': 0, 'played': 5}
         createResponse = PlayerViewSet.create(self, request)
-        if createResponse.data['id'] == 1:
+        while (createResponse.data['id'] < 3):
             createResponse = PlayerViewSet.create(self, request)
 
         request = HttpRequest()

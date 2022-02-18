@@ -52,7 +52,7 @@ class PlayerViewSet(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         # /api/player/<int:pk>
-        if(pk == 1):
+        if(pk < 3):
             return Response(status=status.HTTP_403_FORBIDDEN)
         player = Player.objects.get(id=pk)
         player.delete()
@@ -62,6 +62,9 @@ def RPSView(request):
     # if not request.user.is_authenticated:
     #     return redirect('login')
     return render(request, "rockpaperscissors.html")
+
+def coinView(request):
+    return render(request, "coin.html")
 
 # def register_request(request):
 #     if request.method == "POST":
@@ -98,6 +101,6 @@ def RPSView(request):
 # 	messages.info(request, "You have successfully logged out.") 
 # 	return redirect("homepage")
 
-# def homeView(request):
-#     return render(request, "home.html")
+def homeView(request):
+    return render(request, "home.html")
 

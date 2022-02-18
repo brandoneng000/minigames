@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+        <body>
+            <h1>Join everyone playing flipping coins</h1>
+            <h1> GL HF </h1>
+
+            <p style="display:inline-block; margin:0">Heads:</p> <span id="won" ></span>
+            <br/>
+            <p style="display:inline-block; margin:0">Tails:</p> <span id="loss" ></span>
+            <br/>
+            <p style="display:inline-block; margin:0">Side:</p> <span id="ties" ></span>
+            <br/>
+            <p style="display:inline-block; margin-top:0">Played:</p> <span id="played" ></span>
+            <br/>
+            <p style="display:inline-block; margin:0">Player chooses </p> <span id="playerChoice"></span>
+            <br/>
+
+            <div id="coin"></div>
+            <button id="flip">Flip</button>
+            <p id="yourChoice" style="display:inline-block; margin:0"></p>
+            <br/>
+            <h1 id="gameResults"></h1>
+                <script>  
+                    var url = 'https://worldminigame.com/api/players/2';
+                    var wonElement = document.getElementById("won");
+                    var lossElement = document.getElementById("loss");
+                    var tiesElement = document.getElementById("ties");
+                    var playedElement = document.getElementById("played");
+                    var pickSide = -1;
+                    const flipElement = document.getElementById("flip");
+                    updatePlayerStats();
+
+                    const coinToss = ['Heads', 'Tail', 'Side'];
+                    // generate the radio groups        
+                    const group = document.querySelector("#coin");
+                    group.innerHTML = coinToss.map((toss) => `<p style="display:inline-block; margin:0">
+                            <input type="radio" name="toss" value="${toss}" id="${toss}">
+                            <label for="${toss}">${toss}</label>
+                        </p>`).join(' ');
+                    
+                    // add an event listener for the change event
+                    const radioButtons = document.querySelectorAll('input[name="toss"]');
+
+                    function updatePlayerStats() {
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                wonElement.innerHTML = data.won
+                                lossElement.innerHTML = data.loss
+                                tiesElement.innerHTML = data.ties
+                                playedElement.innerHTML = data.played
+                            });
+                    }
+
+                    flipElement.addEventListener("click", () => {
+                        let selectedSize;
+                        for (const radioButton of radioButtons) {
+                            if (radioButton.checked) {
+                                selectedSize = radioButton.value;
+                                pickSide = radioButton.value;
+                                getCoinTossResult();
+                                break;
+                            }
+                        }
+                    });
+                    
+                    function getCoinTossResult() {
+                        result = Math.floor(Math.random() * 1000);
+                        var gameState = -1;
+                        if(result <= 503) {
+                            gameState = 0;
+                        }
+                        else if(result <= 998) {
+                            gameState = 1;
+                        }
+                        else {
+                            gameState = 2;
+                        }
+                        updateResults(gameState, updatePlayerStats)
+                        yourChoice.innerText = `Coin will land on ${coinToss[gameState]}`
+                        yourResult(gameState);
+                    }
+
+                    function yourResult(gameState) {
+                        if(pickSide == coinToss[gameState]) {
+                            gameResults.innerText = `You win!!`;
+                        }
+                        else {
+                            gameResults.innerText = `You Lose!!`;
+                        }
+                    }
+
+                    function updateResults(results, cb) {
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                switch(results) {
+                                    case 0:
+                                        data.won++;
+                                        break;
+                                    case 1:
+                                        data.loss++;
+                                        break;
+                                    default:
+                                        data.ties++;
+                                        break;
+                                }
+                                data.played++
+
+                                fetch(url, {
+                                    method: 'PUT', // or 'PUT'
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                        'credentials': 'include' 
+                                    },
+                                    body: JSON.stringify(data),
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log('Success:', data);
+                                        cb();
+                                    })
+                                    .catch((error) => {
+                                        console.error('Error:', error);
+                                    });
+                            });
+                    }
+                </script>
+            </body>
+            
+</html>
