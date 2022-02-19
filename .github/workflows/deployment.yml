@@ -1,4 +1,4 @@
-name: AWS SSM Send-Command Example
+name: Ci/CD
 
 on:
   push:
