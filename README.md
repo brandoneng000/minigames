@@ -1,7 +1,5 @@
 # minigames
-![CI/CD](https://github.com/brandoneng000/minigames/actions/workflows/deployment.yml/badge.svg)
-
-[https://worldminigame.com/](https://worldminigame.com/)
+[https://worldminigames.pythonanywhere.com/](https://worldminigames.pythonanywhere.com/)
 
 ## Overview
 
@@ -9,7 +7,7 @@ Minigames is a Python/Django application where users can play some simple games.
 The rock paper scissors game records and displays the total scores of everyone who has played. While the coin toss game
 records the number of heads, tails, sides, and times played. 
 
-Website is deployed on an AWS EC2 Instance. The database that records the scores is utilizing AWS RDS. 
+Website and database is hosted on PythonAnywhere. Previously hosted using AWS EC2 and RDS.
 
 ### Rock paper scissors
 
